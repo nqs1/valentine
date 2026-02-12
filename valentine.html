@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day, Bhavna!</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0011, #3d0028, #1a0011);
+    font-family: 'Georgia', serif;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; padding: 20px; overflow-x: hidden;
+  }
+  .hearts-bg { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .floating-heart {
+    position: absolute; bottom: -60px;
+    animation: floatUp linear infinite; opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
+  }
+  .card {
+    position: relative; z-index: 1;
+    background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    backdrop-filter: blur(20px);
+    border-radius: 28px; padding: 40px 28px;
+    max-width: 440px; width: 92%;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .step { animation: fadeSlideIn 0.6s cubic-bezier(0.16,1,0.3,1); }
+  @keyframes fadeSlideIn {
+    0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .hidden { display: none; }
+  .big-heart { font-size: 70px; display: inline-block; }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+  }
+  h1 { font-size: 1.7em; margin: 12px 0 5px; text-shadow: 0 0 30px rgba(255,100,100,0.5); }
+  .question { font-size: 1.1em; margin: 20px 0 15px; line-height: 1.7; opacity: 0.95; }
+  .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 15px 0; }
+  .btn {
+    background: linear-gradient(135deg, rgba(255,100,100,0.3), rgba(200,50,80,0.3));
+    border: 1px solid rgba(255,150,150,0.3);
+    color: #fff; padding: 14px 28px; border-radius: 50px; font-size: 1em;
+    font-family: 'Georgia', serif; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    backdrop-filter: blur(5px);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+  }
+  .btn:hover { background: linear-gradient(135deg, rgba(255,100,100,0.5), rgba(200,50,80,0.5)); transform: scale(1.08); box-shadow: 0 4px 20px rgba(255,100,100,0.3); }
+  .btn:active { transform: scale(0.95); }
+  .name { font-size: 2em; background: linear-gradient(135deg, #ff9a9e, #ffd1d1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: italic; }
+  .message { font-size: 1.05em; line-height: 1.8; margin: 15px 0; }
+  .highlight { color: #ffd32a; font-weight: bold; font-size: 1.15em; }
+  .year-badge {
+    display: inline-block; background: linear-gradient(135deg, rgba(255,200,100,0.2), rgba(255,150,100,0.2));
+    border-radius: 50px; padding: 10px 28px; margin: 12px 0;
+    font-size: 1.05em; border: 1px solid rgba(255,200,150,0.3);
+  }
+  .sign-off { margin-top: 25px; font-size: 1.2em; font-style: italic; }
+  .sign-name { font-size: 1.4em; color: #ffd32a; }
+  .sparkle { animation: sparkle 2s ease-in-out infinite; display: inline-block; }
+  @keyframes sparkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; transform: scale(1.3); } }
+  .hindi { font-size: 1.05em; margin-top: 10px; display: inline-block; line-height: 1.8; color: #ffc8c8; }
+  .trick-msg { font-size: 0.85em; opacity: 0.5; margin-top: 10px; font-style: italic; }
+  .envelope-wrap { perspective: 800px; margin: 30px auto; width: 220px; height: 160px; cursor: pointer; transition: transform 0.3s; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .envelope-wrap:hover { transform: scale(1.05); }
+  .envelope { width: 100%; height: 100%; position: relative; }
+  .env-body {
+    width: 100%; height: 100%; background: linear-gradient(145deg, #f5e6d0, #e8d5b8);
+    border-radius: 10px; position: absolute; z-index: 1;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #d4a574;
+  }
+  .env-label { color: #c44569; font-size: 1.1em; font-style: italic; text-shadow: none; }
+  .env-flap {
+    width: 0; height: 0;
+    border-left: 110px solid transparent; border-right: 110px solid transparent;
+    border-top: 90px solid #e8d5b8;
+    position: absolute; top: 0; left: 0; z-index: 2;
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+  .env-flap.open { transform: rotateX(180deg); }
+  .env-heart {
+    position: absolute; z-index: 3; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); font-size: 30px;
+    animation: heartbeat 1.2s ease-in-out infinite;
+  }
+  .countdown { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+  .count-box {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px; padding: 12px 10px; min-width: 65px; text-align: center;
+  }
+  .count-num { font-size: 1.8em; color: #ffd32a; font-weight: bold; display: block; }
+  .count-label { font-size: 0.7em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+  .confetti-piece {
+    position: fixed; width: 10px; height: 10px;
+    top: -20px; z-index: 10; pointer-events: none;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<noscript>
+  <div style="background:#ffd32a;color:#333;text-align:center;padding:15px;font-family:Georgia,serif;font-size:1.1em;">
+    Please open this file in Safari or Chrome for the full experience 💕
+  </div>
+</noscript>
+<div class="hearts-bg" id="hearts"></div>
+<div class="card">
+
+  <!-- STEP 1 -->
+  <div id="step1" class="step">
+    <h1>Hey Bhavna!</h1>
+    <div class="question">I made something for you...<br>but first, a quick quiz 😏<br><br>Do you love Anurag?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step2a')">Obviously yes</button>
+      <button class="btn" onclick="goTo('step2b')">Hmm... let me think</button>
+    </div>
+  </div>
+
+  <!-- STEP 2A -->
+  <div id="step2a" class="step hidden">
+    <div style="font-size:50px">😏</div>
+    <div class="question">That was suspiciously fast...<br>but I'll take it!<br><br>Who do you like more?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step3')">Anurag</button>
+      <button class="btn" onclick="goTo('step2a2')">Hmm someone else</button>
+    </div>
+  </div>
+
+  <!-- STEP 2A2 -->
+  <div id="step2a2" class="step hidden">
+    <div style="font-size:50px">😐</div>
+    <div class="question">Excuse me?<br>Let's try that again.<br><br>Who do you like more?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step3')">Anurag</button>
+      <button class="btn" onclick="goTo('step2a3')">Still thinking</button>
+    </div>
+  </div>
+
+  <!-- STEP 2A3 -->
+  <div id="step2a3" class="step hidden">
+    <div style="font-size:50px">😤</div>
+    <div class="question">Bhavna. Focus.<br>There is only ONE option.<br><br>WHO do you like more?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step3')">ANURAG</button>
+      <button class="btn" onclick="goTo('step2a')">Let me reconsider</button>
+    </div>
+    <div class="trick-msg">that button just takes you back to the start 😂</div>
+  </div>
+
+  <!-- STEP 2B -->
+  <div id="step2b" class="step hidden">
+    <div style="font-size:50px">😤</div>
+    <div class="question">Think?! THINK?!<br>Main itna handsome hoon<br>aur tum soch rahi ho?!<br><br>Done thinking?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step2c')">Haan, I love him</button>
+      <button class="btn" onclick="goTo('step2c')">Still thinking...</button>
+    </div>
+  </div>
+
+  <!-- STEP 2C -->
+  <div id="step2c" class="step hidden">
+    <div style="font-size:50px">🙄</div>
+    <div class="question">Bhavna please.<br>There's only one right answer.<br><br>Do. You. Love. Anurag?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step3')">YES!</button>
+      <button class="btn" onclick="goTo('step3')">YESSS!!</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="step hidden">
+    <div style="font-size:50px">😎</div>
+    <div class="question">Good answer.<br>One last question...<br><br>Kal kya karein?</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step3b')">Movie 🍿</button>
+      <button class="btn" onclick="goTo('step3b')">Ice cream date 🍦</button>
+    </div>
+  </div>
+
+  <!-- STEP 3B -->
+  <div id="step3b" class="step hidden">
+    <div style="font-size:50px">😂</div>
+    <div class="question">Why not both?<br><br>Movie + Ice cream it is 🍿🍦</div>
+    <div class="btn-group">
+      <button class="btn" onclick="goTo('step4')">Deal 🤝</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 - ENVELOPE -->
+  <div id="step4" class="step hidden">
+    <div style="font-size:50px">🥹</div>
+    <div class="question">Quiz complete!<br><br>Ab apna surprise kholo 👇</div>
+    <div class="envelope-wrap" onclick="openCard()">
+      <div class="envelope">
+        <div class="env-flap" id="envFlap"></div>
+        <div class="env-body">
+          <div class="env-label">For Bhavna 💌</div>
+        </div>
+        <div class="env-heart">💝</div>
+      </div>
+    </div>
+    <div class="trick-msg">tap to open</div>
+  </div>
+
+  <!-- STEP 5 - FINAL CARD -->
+  <div id="step5" class="step hidden">
+    <h1>Happy Valentine's Day</h1>
+    <div class="name">Bhavna!</div>
+
+    <div class="year-badge">Since 11th December</div>
+    <div class="countdown" id="countdown"></div>
+
+    <div class="message">
+      From that first day — 11th December —<br>
+      to right now, every single moment<br>
+      with you has been <span class="highlight">worth it.</span><br><br>
+
+      You're the reason I smile randomly.<br><br>
+
+      Thank you for bearing with me —<br>
+      my overthinking, my bad jokes,<br>
+      and my "haan bas 5 min" that<br>
+      turn into 2 hours. <span class="sparkle">✨</span><br><br>
+
+      You handle all of it like a queen<br>
+      and I don't say it enough —<br>
+      <span class="highlight">I'm so lucky to have you.</span><br><br>
+
+      <span class="highlight">Ab thoda serious baat —</span><br>
+      Life mein khoob enjoy karo,<br>
+      khao piyo, masti karo, trips pe chalo,<br>
+      shopping karo, binge-watch karo,<br>
+      sab kuch karo...<br><br>
+
+      <em>...bas</em> <strong>GYM BHI JAO.</strong> 🏋️<br><br>
+
+      Kyunki mujhe tumhe bahut lambi<br>
+      zindagi tak jhhelna hai —<br>
+      aur tumhe bhi mujhe.<br><br>
+
+      Here's to many more countdowns,<br>
+      many more "tu pehle phone rakh",<br>
+      many more "sone jao, late ho rha,<br>
+      neend kharab ho jayegi"<br>
+      <em>(even though I never want to hang up)</em><br>
+      and me pretending I'm not<br>
+      completely obsessed with you.<br>
+      <em>(Spoiler: main hoon. Bahut zyada.)</em><br><br>
+
+      <span class="hindi">
+        तुम मेरी सबसे प्यारी मुसीबत हो<br>
+        मेरी favourite notification हो<br>
+      </span>
+    </div>
+    <div class="sign-off">
+      <span class="sign-name">Anurag</span>
+    </div>
+  </div>
+
+</div>
+<script>
+  const c = document.getElementById('hearts');
+  const e = ['💕','❤️','💖','💗','✨'];
+  for (let i = 0; i < 20; i++) {
+    const h = document.createElement('span');
+    h.className = 'floating-heart';
+    h.textContent = e[i % e.length];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.animationDuration = 5 + Math.random() * 8 + 's';
+    h.style.animationDelay = Math.random() * 6 + 's';
+    h.style.fontSize = 14 + Math.random() * 20 + 'px';
+    c.appendChild(h);
+  }
+  function goTo(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function openCard() {
+    document.getElementById('envFlap').classList.add('open');
+    setTimeout(() => { goTo('step5'); launchConfetti(); startCountdown(); }, 900);
+  }
+  function startCountdown() {
+    const start = new Date(2024, 11, 11);
+    const now = new Date();
+    let diff = now - start;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const box = (n, l) => `<div class="count-box"><span class="count-num">${n}</span><span class="count-label">${l}</span></div>`;
+    document.getElementById('countdown').innerHTML = box(days, 'Days') + box(hours, 'Hours') + box(mins, 'Minutes') + box('∞', 'More to go');
+  }
+  function launchConfetti() {
+    const colors = ['#ff6b6b','#ffd32a','#ff9ff3','#54a0ff','#ff6348'];
+    for (let i = 0; i < 50; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = 2 + Math.random() * 3 + 's';
+      p.style.animationDelay = Math.random() * 1.5 + 's';
+      p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      p.style.width = 6 + Math.random() * 10 + 'px';
+      p.style.height = 6 + Math.random() * 10 + 'px';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 5000);
+    }
+  }
+</script>
+</body>
+</html>
